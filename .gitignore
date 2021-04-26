@@ -1,0 +1,39 @@
+# Compiled python modules.
+*.pyc
+
+__pycache__/
+
+# ipython notebook checkpoints
+*.ipynb_checkpoints
+
+# text editor backups
+*~
+
+# VS Code
+.vscode/
+
+# Jupyter NB Checkpoints
+.ipynb_checkpoints/
+
+# Setuptools distribution folder.
+/dist/
+/build/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+
+# Sphinx docs rendered files
+# /docs/build/
+_build
+_static
+_templates
+
+# pytest
+.pytest_cache/
+#VSCode
+.vscode/
+
+data/
+
+venv/
+.venv/
