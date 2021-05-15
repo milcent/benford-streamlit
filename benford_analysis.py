@@ -10,7 +10,8 @@ try:
 except:
     pass
 
-col = st.selectbox("Select column for analysis", df.columns)
+col = st.selectbox("==== Select column for analysis, whose dtype is 'int', "
+                    "'float', or an easily convertible string. ====", df.columns)
 
 # st.write(df.dtypes)
 decimals = st.sidebar.number_input("Number of decimal places", min_value=0,
@@ -22,12 +23,13 @@ sign = st.sidebar.selectbox("Choose which records' sign to analyse",
 try:
     bo = bf.Benford(df[col], decimals=decimals, sign=sign[:3])
     st.sidebar.markdown(f"#### Initial sample size: **{len(df)}**.")
-    st.sidebar.markdown(f"#### Analysis performed on **{len(bo.base)}** records.")
-    st.sidebar.markdown("#### Number of discard entries for each test: ")
-    st.sidebar.markdown("- " +"\n - ".join([f"{key}: **{val}**" for key, val in 
-                            bo._discarded.items()]))
+    st.sidebar.markdown(f"#### Analysis performed on **{len(bo.base)}** " +
+                        f"non-zero and {sign}-sign records.")
+    st.sidebar.markdown("#### Number of discarded entries for each test " +
+                        " (dependent on decimal places chosen): ")
+    st.sidebar.markdown("- " +"\n - ".join(
+                            [f"{bf.constants.names[key]}: **{val}**" for key, 
+                            val in bo._discarded.items()]))
 except:
-    st.markdown("## Something went wrong with your selection. " +\
-        "Benford_py tries to convert data in string to *int* o *float* " +\
-        "but did not succed. Check you data types.")
+    st.markdown("#### Waiting for proper column selection.")
 
