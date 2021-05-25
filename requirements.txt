@@ -1,0 +1,4 @@
+benford-py==0.4.2
+benfordviz==0.1.0
+bokeh==2.3.2
+streamlit==0.80.0
