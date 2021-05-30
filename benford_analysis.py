@@ -19,7 +19,6 @@ csv_file = st.sidebar.file_uploader("", type="csv", key="csv_uploader")
                 
 try:
     df = load_df(csv_file)
-    # st.dataframe(df)    
 
     col = st.sidebar.selectbox("Select column for analysis, whose dtype is 'int', "
                         "'float', or an easily convertible string.", df.columns)
@@ -84,12 +83,17 @@ try:
                         .loc[test_show.Z_score > test_show.critical_values["Z"]]\
                         .index.to_list()
     # st.write(fail_z_digits)
-    col7, col8, col9 = st.beta_columns(3)
-    with col7:
     dig_to_filter = st.selectbox("", options=fail_z_digits)
     filtered_df = filter_df_by_digits(bo, df, TESTS[benf_test], dig_to_filter,
                                      col)
     st.write(filtered_df)
 
+    st.markdown("""***Disclaimer***: this interactive dashboard was built to 
+                facilitate your analysis. It asssumes you already know 
+                your dataset and how to apply the tests, with all possible
+                configurations, and how to interpret the results that may 
+                arise from them. The author assumes no responsability for 
+                how you use any of the information inserted herein, nor 
+                any result from its analysis.""")
 except:
     pass
