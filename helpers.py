@@ -1,8 +1,14 @@
 from typing import List, Union
 from pandas import DataFrame, read_csv
+from benford import Test, Benford
 
+TESTS = {
+    "First Digit Test": "F1D", "Second Digit Test": "SD",
+    "First Two Digits Test": "F2D", "First Three Digits Test": "F3D",
+    "Last Two Digits Test": "L2D"
+}
 
-def get_color_mad(mad:float, mad_list=Union[List, None]):
+def _get_color_mad_(mad:float, mad_list=Union[List, None]):
     if not mad_list:
         return "black"
     if mad > mad_list[2]:
@@ -13,13 +19,15 @@ def get_color_mad(mad:float, mad_list=Union[List, None]):
         return "orange"
     return "green"
 
+
 load_df = read_csv
 
-def make_stats_df(benf_test):
+
+def make_stats_df(benf_test:Test):
     crit_chi  = benf_test.critical_values["chi2"]
     crit_ks = benf_test.critical_values["KS"]
     mad, mad_list = benf_test.MAD, benf_test.critical_values["MAD"]
-    mad_color = get_color_mad(mad, mad_list)
+    mad_color = _get_color_mad_(mad, mad_list)
 
     red_mask_chi = lambda x: f"color: {'red' if x > crit_chi else 'black'}"
     red_mask_ks = lambda x: f"color: {'red' if x > crit_ks else 'black'}"
@@ -31,7 +39,7 @@ def make_stats_df(benf_test):
     stats = {
         "Chi-square": [benf_test.chi_square, crit_chi],
         "Kolmogorov-Smirnov": [benf_test.KS, crit_ks],
-        "Mean Absolute Deviation": [mad, f"{mad_list} *"],
+        "Mean Absolute Deviation": [mad, f"{mad_list} * **"],
         "Bhattacharyya Coefficient": [
             benf_test.bhattacharyya_coefficient, "Better close to 1 *"
         ],
@@ -47,7 +55,7 @@ def make_stats_df(benf_test):
             .applymap(mask_mad, subset="Mean Absolute Deviation")
 
 
-def make_z_scores_df(benf_test):
+def make_z_scores_df(benf_test:Test):
     red_mask = lambda x: f"color: {'red' if x > benf_test.critical_values['Z'] else 'black'}"
     if not benf_test.critical_values['Z']:
         red_mask = lambda x: "color: black"
@@ -60,4 +68,16 @@ def make_z_scores_df(benf_test):
         .applymap(red_mask,
                     subset="Z score of Found Proportions")\
         .hide_index()
-        #.background_gradient(cmap="OrRd", subset="Z score of Found Proportions")
+
+
+def filter_df_by_digits(benf_instance:Benford, base_data:DataFrame,
+                        benf_test_name:str, digits:int, selected_col:str):
+
+    filter_df = benf_instance.base.loc[
+                    benf_instance.base[benf_test_name] == digits, "seq"
+                ]
+    return base_data.join(filter_df, how="inner").drop(columns=["seq"])\
+                .style.set_properties(**{
+                        "background_color":"orange","font-weight": "bold"},
+                    subset=selected_col)
+            
