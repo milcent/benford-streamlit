@@ -65,9 +65,14 @@ def make_z_scores_df(benf_test:Test):
         .hide_index()
 
 
-def filter_df_by_digits(benf_instance:Benford, benf_test_name:str,
-                        digits:int, col_name:str):
-    return benf_instance.base.loc[
-            benf_instance.base[benf_test_name] == digits, "seq"]\
-            .rename(col_name)
+def filter_df_by_digits(benf_instance:Benford, base_data:DataFrame,
+                        benf_test_name:str, digits:int, selected_col:str):
+
+    filter_df = benf_instance.base.loc[
+                    benf_instance.base[benf_test_name] == digits, "seq"
+                ]
+    return base_data.join(filter_df, how="inner").drop(columns=["seq"])\
+                .style.set_properties(**{
+                        "background_color":"orange","font-weight": "bold"},
+                    subset=selected_col)
             

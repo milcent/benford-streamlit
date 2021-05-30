@@ -86,9 +86,10 @@ try:
     # st.write(fail_z_digits)
     col7, col8, col9 = st.beta_columns(3)
     with col7:
-        dig_to_filter = st.selectbox("", options=fail_z_digits)
-        filtered_df = filter_df_by_digits(bo, TESTS[benf_test], dig_to_filter, col)
-        st.dataframe(filtered_df)
+    dig_to_filter = st.selectbox("", options=fail_z_digits)
+    filtered_df = filter_df_by_digits(bo, df, TESTS[benf_test], dig_to_filter,
+                                     col)
+    st.write(filtered_df)
 
 except:
     pass
