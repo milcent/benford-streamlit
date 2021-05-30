@@ -47,8 +47,9 @@ try:
         bo.update_confidence(confidence)
 
     except:
-        st.markdown("""<h4 style='color:red'>Waiting for proper column selecyion</h4>""",
-                unsafe_allow_html=True)
+        st.markdown(
+            """<h4 style='color:red'>Waiting for proper column selection</h4>""",
+            unsafe_allow_html=True)
 
     test_show = getattr(bo, TESTS[benf_test])
 
@@ -56,9 +57,9 @@ try:
     with col1:
         st.markdown("## Digits Found and Expected Proportions")
     with col2:
-        st.markdown(f" Initial sample size: **{len(df)}**."
-                    f" Analysis performed on **{len(bo.base)}** "
-                    f"non-zero, {sign}-sign records.\nNumber of discarded registries for this test (dependent "
+        st.markdown(f"Initial sample size: **{len(df)}**. Analysis performed"
+                    f" on **{len(bo.base)}** non-zero, {sign}-sign records.\n"
+                    "Number of discarded registries for this test (dependent "
                     f"on decimal places): **{bo._discarded[TESTS[benf_test]]}**.")
 
     bbc = BenfordBokehChart(test_show)
