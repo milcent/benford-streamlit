@@ -1,14 +1,11 @@
 import streamlit as st
-# from bokeh.plotting import figure
-# from bokeh.models import Tabs, Panel
-# from bokeh.layouts import Column
 
 import benford as bf
 from benford.constants import CONFS
 from benfordviz.bokeh_plotting import BenfordBokehChart
 
-from helpers import (load_df, make_stats_df,
-                     make_z_scores_df)
+from helpers import (load_df, make_stats_df, make_z_scores_df,
+                     filter_df_by_digits)
 
 TESTS = {
     "First Digit Test": "F1D", "Second Digit Test": "SD",
@@ -68,7 +65,9 @@ try:
     st.markdown("## Scalar statistics")
     independ_stat_df = make_stats_df(test_show)
     st.dataframe(independ_stat_df)
-    st.markdown("\* Independent of sample size or confidence")
+    st.markdown("\* Independent of sample size or confidence; "
+                "** Better close to 0: 0-ref_1: green; ref_1-ref_2: orange; "
+                "ref_2-ref_3: red; and > ref_3: dark red")
 
     col5, col6 = st.beta_columns(2)
     with col5:
@@ -79,5 +78,17 @@ try:
         st.markdown(f"Critical Z score for {confidence}% confidence: "
                     f"{CONFS[confidence]} (red for failing).")
     st.dataframe(make_z_scores_df(test_show))
+
+    st.markdown("## Select failing Z score digit to filter base data")
+    fail_z_digits = test_show.sort_values("Z_score", ascending=False)\
+                        .loc[test_show.Z_score > test_show.critical_values["Z"]]\
+                        .index.to_list()
+    # st.write(fail_z_digits)
+    col7, col8, col9 = st.beta_columns(3)
+    with col7:
+        dig_to_filter = st.selectbox("", options=fail_z_digits)
+        filtered_df = filter_df_by_digits(bo, TESTS[benf_test], dig_to_filter, col)
+        st.dataframe(filtered_df)
+
 except:
     pass
