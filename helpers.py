@@ -2,6 +2,11 @@ from typing import List, Union
 from pandas import DataFrame, read_csv
 from benford import Test, Benford
 
+TESTS = {
+    "First Digit Test": "F1D", "Second Digit Test": "SD",
+    "First Two Digits Test": "F2D", "First Three Digits Test": "F3D",
+    "Last Two Digits Test": "L2D"
+}
 
 def _get_color_mad_(mad:float, mad_list=Union[List, None]):
     if not mad_list:

@@ -4,14 +4,8 @@ import benford as bf
 from benford.constants import CONFS
 from benfordviz.bokeh_plotting import BenfordBokehChart
 
-from helpers import (load_df, make_stats_df, make_z_scores_df,
+from helpers import (TESTS, load_df, make_stats_df, make_z_scores_df,
                      filter_df_by_digits)
-
-TESTS = {
-    "First Digit Test": "F1D", "Second Digit Test": "SD",
-    "First Two Digits Test": "F2D", "First Three Digits Test": "F3D",
-    "Last Two Digits Test": "L2D"
-}
 
 st.markdown("# Interactive Benford Analysis")
 
