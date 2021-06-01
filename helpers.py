@@ -27,6 +27,14 @@ TESTS = {
     "Last Two Digits Test": "L2D"
 }
 
+STATS_DF_LEGEND = """<span style='color:black'>* Independent of sample size 
+    or confidence; ** Better close to 0: </span><span style='color:green'>
+    0-ref_1: green</span><span style='color:black'>; </span><span style='color:
+    orange'>ref_1-ref_2: orange</span><span style='color:black'>; </span><span
+     style='color:red'>ref_2-ref_3: red</span><span style='color:black'>; and 
+     </span> <span style='color:darkred'>> ref_3: dark red</span><span style=
+     'color:black'>. Black when not applicable</span>"""
+
 def _get_color_mad_(mad:float, mad_list=Union[List, None]):
     if not mad_list:
         return "black"

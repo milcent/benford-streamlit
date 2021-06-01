@@ -23,8 +23,8 @@ import benford as bf
 from benford.constants import CONFS
 from benfordviz.bokeh_plotting import BenfordBokehChart
 
-from helpers import (TESTS, load_df, make_stats_df, make_z_scores_df,
-                     filter_df_by_digits)
+from helpers import (TESTS, STATS_DF_LEGEND, load_df, make_stats_df, 
+                    make_z_scores_df, filter_df_by_digits)
 
 st.markdown("# Interactive Benford Analysis")
 
@@ -77,9 +77,7 @@ try:
     st.markdown("## Scalar statistics")
     independ_stat_df = make_stats_df(test_show)
     st.dataframe(independ_stat_df)
-    st.markdown("\* Independent of sample size or confidence; "
-                "** Better close to 0: 0-ref_1: green; ref_1-ref_2: orange; "
-                "ref_2-ref_3: red; and > ref_3: dark red")
+    st.markdown(STATS_DF_LEGEND, unsafe_allow_html=True)
 
     col5, col6 = st.beta_columns(2)
     with col5:
