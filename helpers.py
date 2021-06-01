@@ -35,6 +35,14 @@ STATS_DF_LEGEND = """<span style='color:black'>* Independent of sample size
      </span> <span style='color:darkred'>> ref_3: dark red</span><span style=
      'color:black'>. Black when not applicable</span>"""
 
+DISCLAIMER = """***Disclaimer***: this interactive app was built to 
+                facilitate your analysis. It asssumes you already know 
+                your dataset and how to apply the tests, with all possible
+                configurations, and how to interpret the results that may 
+                arise from them. The author assumes no responsability for 
+                how you use any of the information inserted herein, nor 
+                any result from its analysis."""
+
 def _get_color_mad_(mad:float, mad_list=Union[List, None]):
     if not mad_list:
         return "black"

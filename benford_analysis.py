@@ -23,7 +23,7 @@ import benford as bf
 from benford.constants import CONFS
 from benfordviz.bokeh_plotting import BenfordBokehChart
 
-from helpers import (TESTS, STATS_DF_LEGEND, load_df, make_stats_df, 
+from helpers import (TESTS, STATS_DF_LEGEND, DISCLAIMER, load_df, make_stats_df, 
                     make_z_scores_df, filter_df_by_digits)
 
 st.markdown("# Interactive Benford Analysis")
@@ -99,12 +99,6 @@ try:
                                      col)
     st.write(filtered_df)
 
-    st.markdown("""***Disclaimer***: this interactive dashboard was built to 
-                facilitate your analysis. It asssumes you already know 
-                your dataset and how to apply the tests, with all possible
-                configurations, and how to interpret the results that may 
-                arise from them. The author assumes no responsability for 
-                how you use any of the information inserted herein, nor 
-                any result from its analysis.""")
+    st.markdown(DISCLAIMER)
 except:
     pass
