@@ -1,0 +1,5 @@
+pandas==1.2.4
+bokeh==2.2.2
+streamlit==0.82.0
+benford-py==0.4.2
+benfordviz==0.1.0
