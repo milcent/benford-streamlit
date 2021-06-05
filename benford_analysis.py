@@ -1,11 +1,30 @@
+"""
+Marcel Milcent, Copyright 2021
+
+This file is part of benford-streamlit app.
+
+    benford-streamlit app is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    benford-streamlit app is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with benford-streamlit app.  If not, see <https://www.gnu.org/licenses/>
+"""
+
 import streamlit as st
 
 import benford as bf
 from benford.constants import CONFS
 from benfordviz.bokeh_plotting import BenfordBokehChart
 
-from helpers import (TESTS, load_df, make_stats_df, make_z_scores_df,
-                     filter_df_by_digits)
+from helpers import (TESTS, STATS_DF_LEGEND, DISCLAIMER, load_df, make_stats_df, 
+                    make_z_scores_df, filter_df_by_digits)
 
 st.markdown("# Interactive Benford Analysis")
 
@@ -58,9 +77,7 @@ try:
     st.markdown("## Scalar statistics")
     independ_stat_df = make_stats_df(test_show)
     st.dataframe(independ_stat_df)
-    st.markdown("\* Independent of sample size or confidence; "
-                "** Better close to 0: 0-ref_1: green; ref_1-ref_2: orange; "
-                "ref_2-ref_3: red; and > ref_3: dark red")
+    st.markdown(STATS_DF_LEGEND, unsafe_allow_html=True)
 
     col5, col6 = st.beta_columns(2)
     with col5:
@@ -82,12 +99,6 @@ try:
                                      col)
     st.write(filtered_df)
 
-    st.markdown("""***Disclaimer***: this interactive dashboard was built to 
-                facilitate your analysis. It asssumes you already know 
-                your dataset and how to apply the tests, with all possible
-                configurations, and how to interpret the results that may 
-                arise from them. The author assumes no responsability for 
-                how you use any of the information inserted herein, nor 
-                any result from its analysis.""")
+    st.markdown(DISCLAIMER)
 except:
     pass
