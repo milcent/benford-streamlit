@@ -103,7 +103,7 @@ If your browser does not open automatically, open it and go to [http://localhost
 I have also created a `Docker` container with the interactive app in it ready to go [here](https://hub.docker.com/repository/docker/milcentm/benford-streamlit), so if you have docker installed, type:
 
 ```bash
-docker run --rm -p 8506:8501 milcentm/benford-streamlit
+docker run --rm -p 8501:8501 milcentm/benford-streamlit
 ```
 
 ## Analysis
