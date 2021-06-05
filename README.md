@@ -4,6 +4,8 @@
 
 This project brings [`benford_py`](https://github.com/milcent/benford_py),  [`benfordviz`](https://github.com/milcent/benfordviz), and [`streamlit`](https://streamlit.io/) together in an interactive Benford Analysis.
 
+![Analysis video](figures/13_analysis.gif)
+
 ### Citing
 
 If you find *`benford-streamlit`* useful in your research, please consider adding the following citation:
