@@ -2,6 +2,8 @@
 
 ## Interactive Benford Analysis App
 
+Check it out live on the [Streamlit App Saharing Service](https://share.streamlit.io/milcent/benford-streamlit/benford_analysis.py)
+
 This project brings [`benford_py`](https://github.com/milcent/benford_py),  [`benfordviz`](https://github.com/milcent/benfordviz), and [`streamlit`](https://streamlit.io/) together in an interactive Benford Analysis.
 
 ![Analysis video](https://github.com/milcent/benford-streamlit/blob/master/figures/13_analysis.gif)
